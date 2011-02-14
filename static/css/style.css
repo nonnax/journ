@@ -1,0 +1,294 @@
+html *{
+}
+
+body{
+	font: 10pt/14pt monospace;
+	width: 65%;
+	margin-left:auto;
+	margin-right:auto;
+	xbackground: #000;
+	xcolor: #fff;
+}
+#content{
+	padding:8px;
+	width: 100%;
+	clear: both;
+	border:0px dashed #eee;
+}
+.raw-post{
+	border:3px dashed #eee !important;
+	min-height: 60px;
+}
+.post{
+	padding:0px;
+	margin:0px;
+	padding-left:4px;
+	border-left:1px dashed #ccc;
+	min-height: 60px;
+	clear: both;
+}
+.parent{
+	color: #009 !important;
+}
+.topic{
+	font-size: x-small;
+	color: #090;
+}
+img{
+	float:right;
+	margin-top:10px;
+	margin-right:10px;
+	margin-bottom:10px;
+	width: 80px;
+	height: 110px;
+}
+pre{
+	overflow: auto;
+}
+blockquote{
+	font-style: italic;
+	color: #666;
+}
+div#nav a{
+	xcolor: #1ff;
+	font-weight: bold;
+}
+div#nav{
+	position: relative;
+	width: 100%;
+	height: 40px;
+}
+div.parent{
+	border:1px solid #ccc;
+	background: seashell;
+}
+div.menu{
+	width: 40%;
+}
+div.form-search-box{
+	position: absolute;
+	right: 0;
+	top: 0;
+}
+div.form-search{
+	width: 20%;
+}
+div.buttons{
+	display:none;
+}
+div.form-input-box{
+	padding:2px;
+	margin:0;
+	width: 95%;
+	text-align:top;
+	margin-left: auto;
+	margin-right: auto;
+}
+xlabel{
+	text-align: top;
+	float: left;
+	padding-left: 4px;
+	padding-right: 4px;
+}
+form{
+	padding:2px;
+	margin:0;
+	clear:both;
+	overflow:auto;
+}
+.form-input-box{
+	text-align: right;
+}
+div.form-input-box input[type=text], div.form-input-box select{
+	width: 90%;
+	float: left;
+}
+div.form-input-box select{
+	color: #ccc;
+}
+
+.form-input-box input[type=submit]{
+	clear: both;
+	float:right;
+	margin-right: 18px;
+}
+.form-input-box textarea{
+	width: 99%;
+	min-height: 100px;
+	float: left;
+}
+textarea, input{
+	border: 3px dashed #ede;
+}
+input[type=text]:hover, textarea:hover{
+	background: #ff0;
+}
+div.pages, .navbar{
+	padding: 10px;
+}
+div.pages a{
+	font-weight: bold;
+	padding: 0 10px;
+	border:1px dotted #ccc;
+}
+.current-page{
+	font-weight: bold;
+	color: #133;
+	padding:0 20px !important;
+}
+span.form-search{
+	float: right;
+}
+li.t0{background: #eee;}
+li.t1{background: #fff;}
+li{
+	list-style-type:none;
+	padding:5px 0;
+	xborder-bottom:1px dashed #ccc;
+}
+li:hover{
+	background: #ffc;
+}
+.hidden{
+	display:none;
+}
+a.parent-link{
+	color: #666;
+}
+a{
+	xcolor: #306EFF;
+	color: blue;
+	text-decoration:none;
+}
+a.post{
+	text-decoration:none !important;
+	color: #003;
+}
+a:hover{
+	text-decoration:underline;
+}
+b a{
+	color: red;
+}
+a.link{
+	color: blue;
+}
+li span.reply{
+	display:none;
+}
+li:hover span.reply{
+	display:inline;
+}
+span.path{
+	color: #ccc;
+	margin-right: 4px;
+}
+.L0{
+	margin-left: 0px;
+	font-size: 1.1em;
+}
+.L1{
+	margin-left: 1.5em;
+}
+.L2{
+	margin-left: 3em;
+}
+.L3{
+	margin-left: 6em;
+}
+.L4{
+	margin-left: 9em;
+}
+.L5{
+	margin-left: 12em;
+}
+.L6{
+	margin-left: 15em;
+}
+.L7{
+	margin-left: 18em;
+}
+.L8{
+	margin-left: 21em;
+}
+.L9{
+	margin-left: 24em;
+}
+.L10{
+	margin-left: 27em;
+}
+.L11{
+	margin-left: 30em;
+}
+.L12{
+	margin-left: 33em;
+}
+.L13{
+	margin-left: 36em;
+}
+.L14{
+	margin-left: 39em;
+}
+.L15{
+	margin-left: 42em;
+}
+.Lmax{
+	margin-left: 45em;
+}
+.normal{color:#999;}
+.popular{ font-size: 1.5em;}
+.hit{font-size: 1.5em; font-weight: bold;}
+.date-index{
+	width: 100%;
+	xoverflow:scroll;
+}
+.y0{background: #ded}
+.y1{background: #fff}
+
+.timestamp{
+	display:block;
+	text-align: right;
+	color: #999;
+	width: 20%;
+	font-size: 1.2em;
+	padding-right: 8px;
+	float: left;
+}
+.raw-post a{
+	padding: 0;
+	display:block;
+	float: left;
+	width: 78%;
+	clear:right;
+	right: 0px;
+}
+.view-post{
+	clear: both;
+	position:relative;
+}
+/* Autocompleter styles */ 
+div.auto_complete {
+	width: 100px;
+	background: #fff;
+	display: inline;
+	border: 1px dashed silver;
+}
+div.auto_complete ul {
+	border: 1px solid #888;
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	list-style-type: none;
+}
+div.auto_complete ul li {
+	margin: 0;
+	padding: 3px;
+}
+div.auto_complete ul li.selected {
+	background-color: #ffb;
+}
+div.auto_complete ul strong.highlight {
+	color: #800;
+	margin: 0;
+	padding: 0;
+}
