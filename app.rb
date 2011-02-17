@@ -159,8 +159,7 @@ module Journ::Views
     def _search
         _record_found_header @posts
         br_
-        i=0
-        i.acts_as_toggle
+        i=0.acts_as_toggle
         @posts.each do |p|
             li_(:class=>"t#{i.toggle}") do
                 p.topics.each do |topic|
@@ -183,8 +182,7 @@ module Journ::Views
     def _view_topic t
         _record_found_header @topic_posts
         br_
-        i=0
-        i.acts_as_toggle
+        i=0.acts_as_toggle
         @topic_posts.map do |p|
             li_(:class=>"t#{i.toggle}"){ _view_raw p}
         end
