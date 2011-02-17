@@ -260,9 +260,7 @@ module Journ::Views
     # client: reply
     #
     def _view_full post, h={}
-        _view post do |post|
-            span_ post.created_at.to_words, :class=>'timestamp'
-            b_space
+        _view( post, h) do |post|
             a_ '[reply]',  :href=>R(Reply, post) if h[:allow_reply]
             b_space
             a_ '[edit]',   :href=>R(Posts, post, :render_method=>:edit_post)
@@ -282,22 +280,11 @@ module Journ::Views
     # client: view_post
     #
     def _view_simple post, h={}
-        _view post do |post|
-            span_ post.created_at.to_words, :class=>'timestamp'
-            b_space
+        _view(post, h) do |post|
             a_ post.title.h, :href=>R(Reply, post), :class=>'post'
         end
     end
 
-    ### _view
-    # client: _view_full
-    # client: _view_simple
-    #
-    def _view post, &b
-        div_ :class=>"L#{(post.path_depth)} post" do
-            b.call(post)
-        end
-    end
 
     ## _view_raw
     # client: _view_topic
@@ -305,10 +292,22 @@ module Journ::Views
     #
     def _view_raw post, h={}
         # no indentation div
-        div_ :class=>'raw-post'  do
+        _view post, :class=>'raw-post'  do
+            a_ post.title.h, :href=>R(Reply, post), :class=>"post  #{post.parent_id.zero? ? 'parent' : ''}"
+        end
+    end
+
+    ### _view
+    # client: _view_raw
+    # client: _view_simple
+    # client: _view_full
+    #
+    def _view post, h={}, &b
+        h[:class] ||= "L#{(post.path_depth)} post"
+        div_ h do
             span_ post.created_at.to_words, :class=>'timestamp'
             b_space
-            a_ post.title.h, :href=>R(Reply, post), :class=>"post  #{post.parent_id.zero? ? 'parent' : ''}"
+            b.call(post)
         end
     end
 
