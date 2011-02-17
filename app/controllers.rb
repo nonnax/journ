@@ -18,28 +18,31 @@ module Journ::Controllers
     end
     class Search < R '/search'
         def get
-            page=(@input.page || 1).to_i
-            @posts = Models::Post.order(:created_at.desc)
+            page      = (@input.page || 1).to_i
+            @q        = @input.q
+            q         = "%#{@q}%"
+            @topic_id = @input.topic_id
+            @posts    = Models::Post.order(:created_at.desc)
 
-            @q = @input.q
-            @topic_id=@input.topic_id
-            q = "%#{@q}%"
-            if @topic_id and @topic_id != '0'
+            @posts = if @topic_id and @topic_id.to_i.nonzero? then
                 @topic = Topic[@topic_id]
-                @posts = @topic.posts_dataset.filter("post like ?", q)
-            elsif @topic_id=='0'
+                @topic.posts_dataset
+            elsif @topic_id.to_i.zero?
                 @topic = Models::Topic.new :topic=>'Unclassified'
-                @posts = Post.all_unclassified.filter("post like ?", q)
-            elsif @input.start_date
-                @start_date = @input.start_date
+                Post.all_unclassified
+            end
+
+            @posts = if @start_date = @input.start_date then
                 y, m = @start_date.split('-')
                 y, m = y.to_i, m.to_i
                 dt1 = Date.new(y, m, 1)
-                @posts=Models::Post.filter(:created_at=>((dt1)..(dt1>>1))).order(:created_at.desc)
+                @posts.filter(:created_at=>((dt1)..(dt1>>1))).order(:created_at.desc)
             else
-                @posts = @posts.filter("post like ?", q)
+                @posts.filter("post like ?", q)
             end
+
             @posts = @posts.paginate(page, Journ::MAX_POSTS)
+
             if @input.wants_js
                 render :_search
             else
@@ -64,14 +67,14 @@ module Journ::Controllers
         def get topic_id
 
             page=(@input.page || 1).to_i
-            if topic_id.to_i.zero?
-                @topic = Models::Topic.new :topic=>'Unclassified'
+            @topic_posts = if topic_id.to_i.zero? then
+                @topic    = Models::Topic.new :topic=>'Unclassified'
                 @topic_id = 0
-                @topic_posts = Post.all_unclassified.paginate(page, Journ::MAX_POSTS)
+                Post.all_unclassified.paginate(page, Journ::MAX_POSTS)
             else
-                @topic = Models::Topic[topic_id]
+                @topic    = Models::Topic[topic_id]
                 @topic_id = @topic[:id]
-                @topic_posts = @topic.posts_dataset.paginate(page, Journ::MAX_POSTS)
+                @topic.posts_dataset.paginate(page, Journ::MAX_POSTS)
             end
             if @input.wants_js
                 render :_view_topic, @topic
@@ -87,9 +90,9 @@ module Journ::Controllers
     end
     class Posts < R '/posts', '/posts/(\w+)'
         def get post_id
-            page = (@input.page || 1).to_i
-            @post = Models::Post[post_id]
-            @render_method  = @input.render_method
+            page              = (@input.page || 1).to_i
+            @post             = Models::Post[post_id]
+            @render_method    = @input.render_method
             @post_descendants = @post.descendants.paginate(page, Journ::MAX_POSTS)
             if @render_method
                 render @render_method, @post
